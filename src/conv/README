@@ -1,0 +1,16 @@
+a directory which contains a list of small convertors:
+
+- mwaw2html: convert a file ( accepted by libmwaw ) in html,
+   keeping most of the character and paragraph properties and the
+   table, but not the pictures, ...
+- mwaw2text: convert a file ( accepted by libmwaw ) in text,
+   keeping only the different characters
+
+- mwaw2csv: convert the main spreadsheet spreadsheet content in csv, ...
+- mwaw2raw: a utility which outputs the list of instructions sent by
+   libmwaw, can be used for debugging, ...
+- mwaw2svg: convert a graphic in svg. As not graphic exported are currently
+   implemented in libmwaw, actually does nothing :-~
+
+Note: most of these convertors called only the librevenge associated
+   generators...

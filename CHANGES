@@ -1,0 +1,748 @@
+CHANGES:
+
+11/27/2021:
+- add debug code to read some private rsrc data
+  + allow to read some MacWrite which does not have printer informations
+  
+08/15/2021:
+- add a parser for Scoop files
+
+08/06/2021:
+- add a parser for ScriptWriter files
+
+07/29/2021:
+- add a parser for ReadySetGo 1-4 files
+
+-------- version 0.3.21 (start)  -------------
+
+07/09/2021:
+- add a parser for Student Writing Center files (v1)
+
+06/11/2021:
+- add a parser for Word Maker files (v1)
+
+06/07/2021:
+- add a parser for Canvas 9/10 files (Mac)
+
+-------- version 0.3.20 (start)  -------------
+
+05/06/2021:
+- add a parser for Canvas 7/8 files (Mac)
+
+05/03/2021:
+- add a parser for Canvas Image files (Mac 5-8, Windows 5-6)
+
+04/30/2021:
+- add a parser for Canvas 6 (Mac and Windows)
+
+-------- version 0.3.19 (start)  -------------
+
+04/06/2021:
+- remove many coverity warnings
+
+03/23/2021:
+- add a parser for Canvas 5 ( Mac and Windows )
+
+03/12/2021:
+- add basic support for hatch
+
+02/25/2021
+- add basic support for drop cap
+
+-------- version 0.3.18 (start)  -------------
+
+09/13/2020:
+- add a parser for Jazz(Lotus) writer and spreasheet files
+  + the writer parser can only be called if the file still
+    contains its resource fork
+
+09/01/2020:
+- add a parser for Canvas 3 and 3.5 files
+
+08/24/2020:
+- AppleWorks parser: try to retrieve more Windows presentation
+
+08/01/2020:
+- add a parser for Drawing Table files
+
+07/22/2020:
+- add a parser for Canvas 2 files
+
+07/20/2020:
+- configure.ac: add an enable-asan option
+
+06/26/2020:
+- API: add new reserved enums in MWAWDocument.hxx
+     MWAW_T_RESERVED10..MWAW_T_RESERVED29
+  and add a new define in libmwaw.hxx
+     MWAW_INTERFACE_VERSION
+  to check if these enums are defined
+
+-------- version 0.3.17 (start)  -------------
+
+03/16/2020:
+- remove the QuarkXPress parser (must be in libqxp)
+
+03/15/2020:
+- retrieve the annotation in MsWord 5 document,
+
+03/13/2020:
+- try to better understand RagTime 5-6 document:
+  + retrieve document with one spreasheet as
+    spreadsheet,
+  + retrieve character attachments and footnotes
+    as comments
+
+5/03/2019:
+- add a parser for QuarkXPress v1-2 files
+
+-------- version 0.3.16 (start)  -------------
+
+3/28/2019:
+- small changes when converting MacWrite II/pro files
+
+5/15/2018:
+- transform bitmap in PNG if zlib is avalaible
+
+5/12/2018:
+- add a parser for Fractal Design/MetaCreations/Corel Painter v1-v10
+
+3/31/2018:
+- modernize the code(unique_ptr, ...)
+
+1/31/2018:
+- fix some fuzzer problems
+
+-------- version 0.3.15 (start)  -------------
+
+01/3/2018:
+- add a parser for Microsoft Multiplan v1.11 mac files
+
+12/27/2017:
+- Claris Resolve/Wingz: try to retrieve's the graphic, textbox, ...
+
+-------- version 0.3.14 (start)  -------------
+
+8/23/2017:
+- require c++-11 + modernize the code,
+- AppleWorks/ClarisWorks: try to retrieve more data in dabase's file
+  (the pictures, replace enum id by their values, the calculation's formula).
+- PowerPoint: correct a problem with bullet's encoding in v3-v4 Mac's files,
+- Microsoft Word: try to retrieve some metadata.
+
+-------- version 0.3.13 (start)  -------------
+
+7/15/2017:
+- correct many fuzzing's errors,
+- FreeHand's parser: correct some minor errors.
+
+-------- version 0.3.12 (start)  -------------
+
+3/23/2017:
+- add a parser to read Windows PowerPoint 95 files
+
+-------- version 0.3.11 (start)  -------------
+
+1/23/2017:
+- add some parsers to read Mac PowerPoint v4 files and Windows PowerPoint v2,v4 files
+
+-------- version 0.3.10 (start)  -------------
+
+11/16/2016
+- add some parsers to read Mac PowerPoint v1-v3 files and Windows PowerPoint v3 files
+
+10/6/2016
+- accept to read structured input containing a DataFork's stream and a RsrcInfo's stream
+  (or the three following streams DataFork,InfoFork,RsrcFork)
+- modified the converters to create such an input when they find a rsrc fork...
+
+-------- version 0.3.9 (start)  -------------
+
+6/14/2016
+- allow to compile with clang++ using arguments:
+  "-Weverything -Wno-padded"
+
+6/8/2016
+- allow to compile with clang++ using arguments:
+  "-Weverything -Wno-padded -Wno-old-style-cast -Wno-covered-switch-default"
+- fix some problems found by afl
+
+6/3/2016
+- add a parser to Cricket Draw v1.1.1 files,
+
+5/28/2016
+- add a parser for MouseWrite files
+
+5/18/2016
+- add a parser for MaxWrite files
+
+5/16/2016
+- add a parser to Cricket Draw v1.0.1 files,
+- add a class to store transformation: MWAwTransformation
+
+5/6/2016
+- add a parser for Aldus FreeHand version 1 and 2 files
+  which are not converted by libfreehand's library.
+  It seems logical to move back someday this parser
+  in libfreehand library...
+  
+4/16/2016
+- ApplePict: read uncompressed Quicktime opcode
+- ClarisWorks/AppleWorks: retrieve some metadata
+- all: generate real date/time fields...
+- all: improve the checking of formats when parsing a file
+
+-------- version 0.3.8 (start)  -------------
+
+11/15/2015
+- RagTime v5-v6 parser: try to retrieve the embedded spreadsheets
+  + begin to understand the hierarchical structures which store
+    a chart (but not the meaning of each field),
+- ClarisWorks/AppleWorks: find a new structure in the file's header
+  (which could prevent to convert some database's file),
+- BeagleWorks/GreatWorks/Word Perfect Works: retrieve the picture's
+  field in a database
+- all: improve a little the methods which create spreadsheets,
+- all: make some constructors explicit.
+
+10/13/2015
+- add a parser for Style documents(at least v1.6 and v1.9)
+
+10/9/2015
+- add file signatures for FullPaint documents which have the same format as MacPaint..
+
+10/8/2015
+- add a parser for Pixel Paint documents
+
+-------- version 0.3.7 (start)  -------------
+
+7/22/2015:
+- correct many problems detected by afl...
+
+7/16/2015:
+- RagTime v5-v6 parser: try to retrieve the main layouts and the
+  picture/shape/textbox, ie. now, it generates result but it is
+  still very imcomplete... 
+- MWAW{Graphic,Presentation,Text}Listener: correct a problem in openGroup
+  which may create to incorrect document,
+- create an MWAWEmbeddedObject class to store a picture with various
+  representation,
+- MWAW*Listener: rename insertPicture in insertShape, add a function to
+  insert a texbox in a MWAWGraphicShape(which only insert a basic textbox)
+  ...
+
+6/22/2015:
+- add a parser for MacDraft v4-v5 document
+- allow to create pattern's surface with various intensity
+- allow to create simple measure
+
+6/14/2015:
+- allow to build doc only for the api classes, using --with-docs=no|api|full
+  to create no documentation, only API classes' documentations, all classes'
+  documentations
+  
+5/28/2015:
+- add a minimal parser for ApplePict v1.v2,
+  ie. no clipping, do not take in account the copy mode: srcCopy, srcOr, ...
+
+-------- version 0.3.6 (start)  -------------
+
+5/10/2015:
+- add a parser for MacDraft v1 Document
+
+4/29/2015:
+- add a parser for ClarisDraw Document
+
+4/18/2015:
+- RagTime v5-v6 parser(not functional): continue to works on this filter,
+  try to find the different kinds of cluster and how to parse them, ...
+- AppleWorks/ClarisWorks parser[spreadsheet]: do not remove first empty row/columns.
+- remove all assert calls
+- rename Box2,Vec2,... in MWAWBox2, MWAWVec2,... to avoid potential name's conflict
+
+-------- version 0.3.5 (start)  -------------
+
+12/26/2014:
+- modify API's functions to avoid potential throw.
+
+11/9/2014:
+- AppleWorks/ClarisWorks parser[draw]: 
+  try to send master pages on each page of the final documents
+  try to do not cut shapes, pictures which are on several pages (by creating bigger pages)
+
+10/29/2014:
+- MacDraw Pro: add a parser for MacDraw Pro v1
+
+-------- version 0.3.4 (start)  -------------
+
+10/2/2014:
+- RagTime v5-v6: begin to find the main structures in a document, to be continued...
+- fix some coverity problems.
+
+9/12/2014:
+- AppleWorks: add a presentation parser
+
+8/22/2014:
+- MacDraw II: add a parser for MacDraw II v1.0-v1.1
+
+-------- version 0.3.3 (start)  -------------
+
+7/28/2014:
+- AppleWorks/ClarisWorks: manage multiple headers/footers + better rebuilding of complex group
+
+7/1/2014:
+- MacDraw: add a parser for v0 and v1 documents
+
+6/22/2014:
+- RagTime: add a parser to parse v2 and v3 documents
+
+6/6/2014:
+- rewrite MWAWCellContent::double2Date to avoid problem with 32/64 time_t values
+- correct many <<small>> problems
+
+-------- version 0.3.2 (start)  -------------
+
+5/23/2014
+- create version 0.3.1 to be in correspondance with librevenge-0.0.0
+
+5/13/2014
+- add code to create embedded spreadsheet
+- AppleWorks/ClarisWorks: send page's embedded spreadsheets as spreadsheet (instead of table) 
+
+-------- version 0.3.1 (start)  -------------
+
+4/16/2014
+- GreatWorks: add a database parser which uses spreadsheet interface
+
+4/8/2014
+- BeagleWorks/WordPerfect Works: add a database parser which uses spreadsheet interface
+
+4/3/2014
+- MicrosoftWorks: add a database parser which uses spreadsheet interface
+
+3/29/2014
+- MicrosoftWorks: add a graphic parser(must find more document to improve it)
+
+3/21/2014
+- GreatWorks: replace the parser of vector graphic documents by a parser
+  which generates graphic documents + correct to code to reconstruct arc/pie
+
+3/19/2014
+- BeagleWorks/WordPerfect Works: add parser of vector graphic documents
+
+3/13/2014
+- SuperPaint: add a parser of drawing SuperPaint v1 document
+
+3/7/2014
+- SuperPaint: add a parser of Paint SuperPaint v1 document
+
+3/5/2014:
+- AppleWorks/ClarisWorks: make the parser of the paint documents
+   a parser which creates graphic (instead of a text document).
+- MacPaint: add a parser of MacPaint document + move the code
+   to parse GreatWorks v1 paint files (which have the same format)
+   in this parser.
+3/4/2014:
+- GreatWorks: add parser of paint documents
+3/3/2014:
+- BeagleWorks/WordPerfect Work: add parser of paint documents
+2/28/2014:
+- transform MWAWGraphicListener into a listener able to export draw files
+
+2/21/2014:
+- Claris Resolve: add a spreadsheet parser (only export spreadsheet's content
+  but not the frames)
+- Claris Resolve/Wingz: try to decode encrypted files
+
+2/14/2014:
+- Wingz: add a spreadsheet parser (only export spreadsheet's content
+  but not the frames)
+- check that the output of the different executables are compatible with
+  help2man --help-option=-h --version-option=-v --no-discard-stderr EXECUTABLE
+
+2/2/2014:
+- AppleWorks/ClarisWorks: add a spreadsheet parser for spreadsheet
+  (only export main spreadsheet's content but not the frames), and
+  for database(export the main database content row by row as a
+  spreadsheet)
+
+1/23/2014:
+- add some enums of pure spreadsheet applications...
+
+1/22/2014:
+- GreatWorks: add a spreadsheet parser(main content + some graphics)
+
+1/17/2014:
+- MicrosoftWorks: add a spreadsheet parser(main content + some graphics)
+
+1/10/2014:
+- rename all the parser files to recognize more easily the parser...
+
+1/6/2014:
+- BeagleWorks/WordPerfect Work: add code to retrieve chart, very basic,
+  ie. retrieve only the data ranges:-~
+- add a class MWAWChart to store and create some basic charts
+
+12/26/2013:
+- rename mwaw2odt in mwaw2odf in writerperfect
+- BeagleWorks/WordPerfect Work: add a spreadsheet parser
+
+12/22/2013:
+- add a listener MWAWSpreadsheetListener to create spreadsheet document
+
+12/18/2013:
+- create simple graphic shapes directly (rectangles, lines, cicles, polygon),
+  ie. no longer create an embedded object to export a single graphic shapes.
+  Note: the path shapes and the shapes' group continue to create an embedded
+  object 
+
+11/02/2013:
+- update libmwaw to depend on librevenge
+
+============== end of version 0.2. =================
+
+12/02/2013:
+- AppleWorks/ClarisWorks parser: recognize more bitmap
+
+-------- version 0.2.1 (start)  -------------
+
+10/19/2013:
+- switch to version 0.2: simplify the interface to retrieve graphic created
+  by libmwaw, add possibility to manage password in some near futur, try
+  to make all enum more meaningfy.
+
+10/17/2013:
+- Microsoft Word parser: try to improve the parsings of the character and
+  paragraph properties. This must correct most of the problems concerning the 
+  paragraph properties but only some concerning the character properties.
+
+10/10/2013:
+- AppleWorks/ClarisWorks parser: begin to parse the spreadsheet and
+  database structure + begin to reconstruct a spreadsheet present in a
+  word text document in a table.
+  Create a small tool mwaw2csv to retrieve the main content of a spreadsheet
+  /database AppleWorks/ClarisWorks.
+
+10/07/2013:
+- AppleWorks/ClarisWorks parser: retrieve the patterns, the wallpaper;
+  send the reconstructed bitmaps with the good size; retrieve the accross
+  pages in a drawing document; try to reconstruct a single picture for a
+  group of shape, ...
+
+09/27/2013:
+- FullWrite parser: retrieve the header/footer + better reconstruction of
+  frame's borders
+
+09/25/2013:
+- HanMac Word-J: retrieve the patterns, the textboxes borders and links,
+  try to reconstruct a single picture for a group of shape, ...
+
+09/23/2013:
+- HanMac Word-K: retrieve the patterns, the textboxes borders and links,
+  try to reconstruct a single picture for a group of shape, ...
+
+09/18/2013:
+- add some functions to MWAWGraphicListener: to make it more similar to
+  MWAWContentListener
+- create a virtual parent class MWAWListener which regroups the similar
+  function in MWAWGraphicListener and MWAWContentListner,
+- GreatWorks parser: add pattern+gradient, generate pictures which
+  regroup many shapes, remain some problem with z-index
+
+09/15/2013:
+- make MWAWPictBasic disappear
+
+09/13/2013:
+- add MWAWGraphicListener: a listener to create complex picture; first try, must be improved...
+- add MWAWGraphicInterface: an internal graphic interface a la libwpg-0.3.0 ( which contains
+  functions to output in libwpg-0.2.0 format )
+- begin to remove the calls to the previous classes in MWAWPictBasic...
+
+09/11/2013:
+- add a class MWAWGraphicShape to define basic shapes,
+- begin to remove call to MWAWPictBasic to prepare the creation of a MWAWGraphicListener
+- check that Acta, BeagleWorks/WordPerfect Work, LightWay Text, MacDoc, MacWrite,
+  Mariner Write, Nisus Writer, WriterPlus, Z-Write use the new properties' classes
+
+09/07/2013:
+- More Parser: recognize basic picture in the main data text
+- check that DOCMaker, eDoc, More, MindWrite, SimpleText, Tex-Edit, WriteNow
+   use the new properties' classes,
+
+09/06/2013:
+- refactor the graphic generation: add classes to define complex graphic
+  styles and modify the basic shapes, text box and group classes to create
+  more complex pictures. 
+  This will probably imply to introduce a GraphicListener in some near future,
+  but not now...
+- modify Microsoft Works parser to use these classes to generate ( when possible)
+  graphics with pattern, gradient background and to render a group of simple
+  shapes and text in one graphic (when possible)
+
+============== end of version 0.1. =================
+
+07/31/2013:
+- recognize more WriteNow 1.0 files
+
+07/29/2013:
+- check that the Microsoft Word use the new properties' classes,
+- Microsoft Word parser: understand where the different properties
+  are exactly stored,
+
+07/16/2013:
+- check that LightWay Text, Mariner Write, Microsoft Works, WriterPlus
+  use the new properties' classes,
+- Microsoft Works parser: retrieve the cell background and font colors +
+  try to recognize functions patterns,
+
+07/15/2013:
+- check that FullWrite use the new properties' classes,
+- try to retrieve the pages' margins, the sidebar and their content,
+
+07/09/2013:
+- check that Acta, BeagleWorks/WordPerfect Works, GreatWorks, HanMac Word-J,
+  HanMac Word-K, Nisus Writer, Z-Write use the new properties' classes,
+- HanMac Word-J, HanMac Word-K: retrieve the extra line's style in a table's
+  cell,
+
+07/07/2013:
+- add a parser for MacDoc v1.3 document and self-reading document
+
+07/05/2013:
+- MWAWZip and MWAWFile: look also in FINDER.DAT and RESOURCE.FRK to retrieve
+  resource fork
+- MacWrite II/Pro: use patterns to define the final color + retrieve
+  table's cells properties
+- WriteNow: retrieve table's cells properties
+- check that AppleWorks/ClarisWorks, DOCMaker, eDoc, MacWrite, MindWrite,
+  More, SimpleText, Tex-Edit, WriteNow use the new properties' classes,
+
+07/02/2013:
+- refactor the MWAWCell and MWAWTable classes
+
+-------- version 0.1.11 (start)  -------------
+
+06/24/2013:
+- add a parser for BeagleWorks v1.0 and WordPerfect Works v1.2
+- optimize a little the detection of a hqx/zip Document
+
+06/14/2013:
+- modify the code to use RVNG_SEEK_END when possible
+
+06/12/2013:
+- add a parser for GreatWorks v1-v2 to read text and draw document
+
+05/28/2013:
+- add a parser for More 2.0 and 3.0, retrieve the organization
+  part but not the slide/tree parts ( one days in a Library
+  to retrieve slides ? )
+
+-------- version 0.1.10 (start)  -------------
+
+05/13/2013:
+- improve a little the Microsoft Word filter to better manage
+  character and paragraph properties
+
+05/07/2013:
+- check that the remaining parsers (excepted Microsoft Word) use the
+  new properties' classes,
+- add table generation in FullWrite parser,
+- rewrite from scratch zip.cpp (to avoid using different license),
+- + many code corrections done by David Tardon.
+
+05/03/2013:
+- check that the WriterPlus parsers use the new properties' classes,
+- simplify a little the code of MWAWDocument
+
+04/30/2013:
+- add a parser for Acta v2 and Acta Classic v1,
+- check that the DOCMaker, eDOC, SimpleText, Tex-Edit, Z-Write parsers
+  use the new properties' classes,
+
+04/25/2013:
+- rewrite MWAWPageSpan,
+- add classes MWAWField, MWAWNote, MWAWSection to store/manage
+  field, note, section properties,
+- check that the ClarisWorks/AppleWorks, MacWrite, MindWrite,
+  WriteNow parsers use the new properties' classes,
+- improve a little the ClarisWorks/AppleWorks frame position by
+  placing <<correctly>> all page's frames,
+- MWAWContentListener : add a sanity check to insure that at most
+  200 very small pictures are generated.
+
+04/14/2013: ----- version 0.1.9 (start) ---------
+
+04/14/2013:
+- check that the Microsoft Word parser use all
+  the paragraph properties
+- improve a little the Microsoft Word filter to better manage
+  character and paragraph properties
+
+04/04/2013:
+- add parser for HanMac Word-J document
+- HanMac Word-K: retrieve header/footer, footnote, section, ...
+
+03/12/2013: ----- version 0.1.8 (start) ---------
+
+03/12/2013:
+- skip version 1.6 ( to be coherent with tag )
+
+03/08/2013:
+- check that HanMac Word-K and Microsoft Works parser use all
+  the paragraph properties
+- refactoring of the windows building by Fridrich Strba + many
+  other improvements...
+
+03/04/2013:
+- check that Claris/AppleWorks, Mariner Write, MindWrite parsers use all
+  the paragraph properties
+- add the management of outline ( normal and hidden ) in FullWrite
+  parser and the management of paragraph borders. Remains some problems,
+  ...
+
+02/22/2013:
+- begin to add a new list manager in MWAWList
+- check that eDOC, DOCMaker, LightWay Text, MacWrite, Nisus Writer,
+  SimpleText, Tex-Edit, WriteNow, WriterPlus, Z-Write parsers use all
+  the paragraph properties
+
+02/09/2013:
+- begin to rewrite MWAWParagraph
+- add a SimpleText/TeachText v1.2 parser
+- add a Tex-Edit v2.7 parser
+
+02/06/2013:
+- add a parser for eDOC v2.1 document
+
+01/30/2013: ----- version 0.1.7 (start) ---------
+
+01/30/2013
+- update Mariner Write and Microsoft Word to use new font properties,
+- manage multi header, table, fill properties in Mariner Write filter,
+- improve a little the Microsoft Word filter to better manage character properties
+
+01/21/2013
+- update HandMac Word-K, LightWay Text, Nisus parser to use the new font properties, 
+- modify mwaw2html to use html5 and CSS properties,
+- add OS6 Central European, Cyrillic, Turkish encodings ( do not know if encoding finding works ).
+
+01/14/2013
+- add a DOCMaker v4 parser
+- update mwawFile to use xattr functions and to look for a ._FILE if no attributes if found...
+- modify mwaw2html to recognize more styles and better treat footnotes, ...
+
+01/10/2013
+- update FullWrite* parser to detect more paragraph properties (to be continued),
+- update Apple/ClarisWorks, FullWrite*, MindWrite, Microsoft Works parsers to use the new font properties,
+
+01/06/2013:
+- create a class MWAWColor to store color,
+- begin to rewrite MWAWFont to add new properties 
+  and update MacWrite*, WriteNow, WriterPlus parsers to use the new properties
+- add MWAWFontSJISConverter to decode S-JIS encoding
+  and update Claris/AppleWorks and LightWay Text to use it.
+  Seems to works for the first parser ( ie. Google finds resulting words :-) )
+  but not to the second parser ( ie. the SJIS-encoding is not even detected in
+  my 2 Japanese's files :-~ )
+
+01/01/2013: ----- version 0.1.5 (start) ---------
+
+12/30/2012
+- add a first parser for Z-Write 1.3.
+
+12/26/2012
+- add a first parser for LightWayText 4.5 ( only Mac Format ), autoindent,
+  macros not implemented.
+
+12/21/2012
+- add a first parser for Mariner Write Lite 1.6, other Mariner Write 1.* may
+  be recognized ( ignoring some features : table, multi-columns, multi headers,
+  ...) ; but I do not have enough file to test.
+
+12/07/2012
+- add a first parser for HanMac Word-K document ( 2.0.5 and 2.0.6 ),
+  in debug mode, the HanMac Word-J (2.0.4) are also recognised and a few
+  zones are parsed but no output is generated...
+
+11/12/2012: ----- version 0.1.4 (start) ---------
+
+11/12/2012
+- try to improve a little the claris/appleworks parser
+  ( use vertical descent to add AppleWorks v6 char attachment,
+    use border and background color parameters when building table
+    cells and some frames )
+
+11/01/2012
+- add a OSX specific tools: mwawFile to allow to find the type of old files
+  ( Note: this tools using specific OSX calls deprecated in 10.8 can
+    probably only compile for mac target 10.4<->10.7 )
+
+10/26/2012
+- minor improvements on the Nisus Parser + find some Nisus 3.4<->6.5 files
+  and check that the parser can read them.
+
+10/21/2012:
+- try to improve a little the FullWrite Professional parser
+  ( understand better two of the three main structures + begin to
+    send rulers, some anchor picture and some variable picture )
+
+09/30/2012: ----- version 0.1.3 (start) ---------
+
+10/09/2012:
+- add a Microsoft Word parser for v1 and v3 (incomplete)
+09/30/2012:
+- try to improve a little the claris/appleworks parser
+  ( reconstruct the table, build the graph structure + begin to
+    try to send some pages anchor picture/... )
+- add vcproj and vcxproj files (inpired by libwps, not tested)
+
+09/15/2012:
+- add Nisus Writer 4.0 parser
+- add code to read zip and binhexed files 
+    and so retrieve the resource fork
+- try to sign the libraries and the executable:
+    lib[mwaw|wpd|wpg]*.dylib and mwaw2odt
+
+07/31/2012: ----- version 0.1.2 (start) ---------
+
+07/30/2012:
+- retrieve tables and pictures in Microsoft Word 4-5
+  document (incomplete)
+07/16/2012:
+- add Microsoft Works 4.0 parser
+
+06/28/2012:
+- add MindWrite 2.1 parser
+
+06/28/2012: ----- version 0.1.1 (start) ---------
+
+05/28/2012:
+- add a Microsoft Works 3.0 parser
+
+05/20/2012: ----- version 0.1.0 (start) ---------
+- rename all the files to simplify the hierarchy,
+  which implies a major version bump:-~,
+
+============== end of version 0.0. =================
+04/14/2012: 
+- add Microsoft Works 1.0, 2.0 parser
+- add a crude parser for FullWrite Professional
+
+03/17/2012: 
+- tags 0.0.2
+
+03/13/2012:
+- add MacWrite II, MacWrite Pro 1.5, WriteNow v1.0-v2.0 parser
+- add Microsoft Word v4.0-v5.0 parser
+  ( crude version which retrieves the text)
+
+02/04/2012:
+- add parser for MacWrite Pro 1.0
+- tags 0.0.1
+
+01/12/2012: add first version of WriteNow 3.0 and 4.0 Parser 
+
+12/19/2011: creation
+- libmwaw created from on version of libwps.
+- add first version of MacWrite 4.5 and ClarisWorks/AppleWorks Parser
+

@@ -1,0 +1,73 @@
+all: the MonoType Sorts fonts is for pc
+     => rename it in _MonoType Sorts + change code in Power*cxx
+       to only use it in not mac file
+
+Acta:
+- retrieve color in label
+
+ClarisResolve:
+- does not understand custom format
+
+ClarisDraw:
+- understand how text can be bound to objects,
+- some transparent shapes are white :-~
+- replace line with measure by measure
+
+ClarisWorks/AppleWorks:
+- spreadsheet: check for table vertical alignement
+- multiple header/footer not in word processing document
+- pb with a linked zone in v6/header.cwk
+- file v2/Doc\ Claris-G06\:96 : one empty group has an odd dimension
+- file v2/Ouvrez-moi-G07:96 : pb of picture position in the big frame
+- file v4/seventh_grade.cwk contain a lot of unrecognized MacType pict files...
+- file v6/pres6.cwk : problem with the spreadsheet 
+
+FullWrite:
+- retrieve the header/footer,
+
+GreatWorks:
+- check z-index,
+- check arc generation
+
+HanMac Word-K:
+- check z-index,
+
+MacDoc:
+- decrypt the resource MDop 
+
+MacDraft:
+- try to implement group which merge 1D curve in 2D surfaces
+- better implementation of measures
+
+MacDraw:
+- flip on text
+- transparency on picture
+- [Pro] replace line with measure by measure
+
+MacWrite:
+- manage better the field in header/footer ( see MindWrite)
+
+MacWrite II/Pro:
+- manage better the frame properties: wrapping, ...
+- retrieve the 64 patterns to create textbox background
+
+Mariner Write:
+- check if the rule uses the similar patterns than paragraph+cells or
+  if there have a different patterns set...
+
+Microsoft Word:
+- do not send the last EOL in header/footer,
+- potential problem when dectecting the character properties in a table's cell...
+
+Microsoft Works:
+- all: check the page margins
+- v4: the bottom/top margins must include header/footer size, ...
+- v2 spreadsheet: numbering format is ignored
+
+RagTime:
+- add code for shared text zone
+- parse chart 
+
+WriteNow:
+- multiple headers/footers
+

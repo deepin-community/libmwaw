@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+  NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+endif
+	
+CONFIGURE_FLAGS += --disable-werror --docdir=/usr/share/doc/libmwaw-doc --without-docs
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+
+override_dh_auto_build-arch:
+	dh_auto_configure -- $(CONFIGURE_FLAGS)
+	$(MAKE) $(NJOBS)
+
+override_dh_auto_build-indep:
+	dh_auto_configure -- $(filter-out --without-docs,$(CONFIGURE_FLAGS))
+	$(MAKE) $(NJOBS)
+

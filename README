@@ -1,0 +1,153 @@
+INSTALLATION
+
+General
+=======
+
+Since libmwaw was based on librevenge code (for convenience), you need to install
+librevenge in order to build libmwaw. You can get librevenge from:
+
+- librevenge <http://libwpd.sourceforge.net/download.html>
+
+Unix/Linux/Darwin
+==========
+
+Installation on Unix/Linux/Darwin should be simple.
+Simply execute the following sequence of commands:
+
+./configure ; make ; sudo make install
+
+Myself, I build using following options: "./configure --with-sharedptr=tr1"
+
+Extensive installation instructions can be found in the INSTALL file.
+
+Windows
+=========================================
+Beta tester needed to test the compilation and report problems
+
+Windows - Microsoft(tm) Visual Studio/C++
+=========================================
+
+A workspace for MSVC6 can be found in the ./build/win32/ directory.
+This workspace contains a projects file to compile a release version or 
+a debug version of libmwaw. 
+
+NOTE: Using the MSVC build system will result in a static library only. 
+No dll can be created yet using this build system. If you want to create 
+a dll, please use the MingW build system (see below for details).
+
+
+Windows - MinGW
+===============
+
+First of all, in order to use libmwaw in your application, you do not need
+to build it yourself. If you have access to a binary distribution, you
+are encouraged to use it. If for whatever reason you still want to build
+libmwaw using MinGW, read following instructions.
+
+
+* Build environment and dependencies
+
+In order to build libmwaw, you have to have installed MinGW distribution from
+http://www.mingw.org. Because the build system of libmwaw uses autotools, you
+must install also the MSys packages. It is advisable to install all recent
+packages into a path that does not contain spaces. Besides the MinGW
+distribution, you have to install the _runtime_ and _development_ packages of
+libmwaw dependency librevenge from librevenge.sourceforge.net/download.html. The packages
+you need are librevenge-{version}-MinGW.zip and librevenge-devel-{version}-MinGW.zip
+
+
+* Build procedure
+
+1. Unpack the source code by running:
+
+  gunzip -dc libmwaw-{version}.tar.gz | tar xpf
+
+You can also use WinZip or any other GUI compression tool.
+
+2. Next, run:
+
+  export ACLOCAL_FLAGS='-I <pkg-config installation prefix>/share/aclocal'; \
+  ./autogen.sh
+
+Some versions of libtool have bug that prevents MinGW from creating shared
+libraries. The autogen.sh script "libtoolizes" the package using the libtool
+included with MinGW distribution. Like that you are sure that your libtool is
+able to create DLLs.
+The ACLOCAL_FLAGS variable is there in order to allow the auto* scripts to find
+the pkg.m4 macro that is part of the pkg-config distribution. If this macro is
+not found, the generated configure script will be ending with an error.
+
+3. Time to configure libmwaw; run:
+
+  ./configure [--prefix=<target>] [--enable-static] [--disable-shared]
+
+By default, the configure script uses as prefix "/usr/local" and configures to
+create only shared libraries.
+
+4. Nearly done. Make sure you have a clean build by running:
+ 
+  make clean all
+
+5. And last but not least, compile and install libmwaw by running:
+
+  make install [-i]
+
+If you configure using "--enable-static --disable-shared" (pure static library
+creation), the libtool import libraries are not created. Make will try to install
+them and will stop with error. The "-i" option makes it to report the error, but
+not to stop. Like that the installation will succeed.
+
+
+
+
+   =============================================
+   ==    INSTALLATION OF Mwaw2odf             ==
+   =============================================
+
+If we want to compile mwaw2odf ( which is a part of writerperfect),
+you must first download libodfgen and writerperfect in
+<http://libwpd.sourceforge.net/download.html> and finally, in each
+directories, execute configure with the options corresponding to you
+computer and launch make to recompile.
+
+   =============================================
+   ==    American fuzzy loop                  ==
+   =============================================
+
+After installing afl from http://lcamtuf.coredump.cx/afl/, you can
+call:
+
+  CXX=afl-g++ ./configure 
+  make clean all install
+
+or if you compile with clang:
+
+  CXX=afl-clang++ ./configure
+  make clean all install
+  
+the next step consists in regrouping a list of test files in some
+directory (for instance input) ; finally, you can launch the afl-fuzz:
+
+  afl-fuzz -i input -o output mwaw2raw @@
+
+   =============================================
+   ==    Emscripten                           ==
+   =============================================
+
+After installing Emscripten from http://emscripten.org, you need first
+install of a version of librevenge compiled with Emscripten (for instance,
+you can configure it with --prefix=/usr/local/em/).
+
+I use the following commands to compile libmwaw in bytecode:
+
+  emconfigure ./configure PKG_CONFIG_LIBDIR=/usr/local/em/lib/pkgconfig/ --prefix=/usr/local/em/
+  emmake make clean all install
+  
+TODO: explain how to create final executables from the created bytecode files.
+
+   =============================================
+
+That's all folks! While no mailing exists, for more information, ask
+questions directly to osnola@users.sourceforge.net. Remember that Uncle Google can
+also be of big help especially when the problem is not with libmwaw, but with one of its 
+dependencies.

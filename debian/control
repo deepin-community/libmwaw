@@ -1,0 +1,56 @@
+Source: libmwaw
+Priority: optional
+Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Uploaders: Rene Engelhard <rene@debian.org>
+Build-Depends: debhelper (>= 10),
+               dh-autoreconf,
+               libboost-dev,
+               librevenge-dev,
+               pkg-config,
+               zlib1g-dev
+Build-Depends-Indep: doxygen
+Standards-Version: 3.9.6
+Section: libs
+Homepage: http://sourceforge.net/projects/libmwaw
+
+Package: libmwaw-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libmwaw-0.3-3 (= ${binary:Version}),
+         librevenge-dev,
+         ${misc:Depends}
+Description: import library for some old Mac text documents -- development
+ libmwaw contains some import filters for old Mac text documents
+ (MacWrite, ClarisWorks, ... ) based on top of libwpd.
+ .
+ This package contains the development files (headers, ...).
+
+Package: libmwaw-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: import library for some old Mac text documents -- documentation
+ libmwaw contains some import filters for old Mac text documents
+ (MacWrite, ClarisWorks, ... ) based on top of libwpd.
+ .
+ This package contains the documentation.
+
+Package: libmwaw-0.3-3
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: import library for some old Mac text documents
+ libmwaw contains some import filters for old Mac text documents
+ (MacWrite, ClarisWorks, ... ) based on top of libwpd.
+
+Package: libmwaw-tools
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: import library for some old Mac text documents -- tools
+ libmwaw contains some import filters for old Mac text documents
+ (MacWrite, ClarisWorks, ... ) based on top of libwpd.
+ .
+ This package contains mwaw2html, mwaw2raw and mwaw2text.

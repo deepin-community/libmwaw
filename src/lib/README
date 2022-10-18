@@ -1,0 +1,355 @@
+------------------------------------------------------------
+--------------            Structure           --------------
+------------------------------------------------------------
+- MWAW*, libmwaw* : internal core part of libmwaw (ie. classes used by all the parser )
+
+- Acta*             : parser of Acta documents
+- ApplePict*        : parser of Apple picture (.pct)
+- BeagleWks*        : parser of BeagleWorks and WordPerfect Works documents
+- Canvas*           : parser of Canvas documents (v2-10)
+- ClarisDraw*       : parser of ClarisDraw documents
+- ClarisWks*        : parser of ClarisWorks and AppleWorks documents
+- CorelPainter*     : parser of Fractal Design/MetaCreations/Corel Painter (v1-v10)
+- CricketDraw*      : parser of Cricket Draw documents (v1.0.1 and v1.1.1)
+- DocMkr*           : parser of DOCMaker documents
+- DrawTable*        : parser of Drawing Table documents v1
+- EDoc*             : parser of eDOC documents
+- FreeHand*         : parser of Aldus FreeHand documents (v1-v2)
+- FullWrt*          : parser of FullWrite documents
+- GreatWks*         : parser of GreatWorks documents
+- HanMacWrdJ*       : parser of HanMac Word-J documents
+- HanMacWrdK*       : parser of HanMac Word-K documents
+- Jazz*             : parser of Jazz spreadsheet and writer documents v1
+- LightWayTxt*      : parser of LightWay Text documents
+- MacDoc*           : parser of MacDoc documents
+- MacDraft*         : parser of MacDraft documents
+- MacDraw*          : parser of MacDraw documents
+- MacDrawPro*       : parser of MacDraw II, MacDraw Pro documents
+- MacPaint*         : parser of MacPaint (and FullPaint) documents
+- MacWrt*           : parser of MacWrite documents
+- MacWrtPro*        : parser of MacWrite II, MacWrite Pro documents
+- MarinerWrt*       : parser of Mariner Write documents
+- MaxWrt*           : parser of MaxWrite documents
+- MindWrt*          : parser of MindWrite documents
+- More*             : parser of More documents (retrieving the organization part)
+- MouseWrt*         : parser of MouseWrite documents
+- MsWks*            : parser of Microsoft Works documents
+- MsWrd*            : parser of Microsoft Word documents
+- Multiplan*        : parser of Microsoft Multiplan documents
+- NisusWrt*         : parser of Nisus Writer documents,
+- PixelPaint*       : parser of Pixel Paint documents,
+- PowerPoint*       : parser of PowerPoint documents,
+- RagTime*          : parser of RagTime documents,
+- ReadySetGo*       : parser of Ready Set Go documents,
+- Scoop*	    : parser of Scoop documents,
+- ScriptWriter*	    : parser of Script Writer documents,
+- StudentWritingC*  : parser of Student Writing Center documents,
+- Style*            : parser of Style documents,
+- SuperPaint*       : parser of SuperPaint document,
+- TeachTxt*         : parser of TeachText/SimpleText/Tex-Edit documents,
+- Wingz*            : parser of Claris Resolve/Wingz documents
+- WordMaker*        : parser of Word Maker documents
+- WriteNow*         : parser of WriteNow documents
+- WriterPls*        : parser of WriterPlus documents
+- ZWrt*             : parser of Z-Write documents
+
+------------------------------------------------------------
+--------------            Exported           --------------
+------------------------------------------------------------
+## new interface	
+- libmwaw.hxx
+- MWAWDocument.hxx
+
+------------------------------------------------------------
+--------------      generic tools             --------------
+------------------------------------------------------------
+
+These files defined basic tools which must be used by the parsers :
+## libmwaw_internal.hxx
+	- MWAW_DEBUG_MSG, shared_ptr, Vec2, Vec3 and Box2 and the exception
+	- define basic type: NumberingType, SubDocumentType, ...
+
+## MWAWInputStream.hxx
+	internal wrapper of RVNGInputStream (with functions to read Ole, ...)
+
+## generic tools
+
+- MWAWDebug.hxx : class to store parsed data in an intermediate file
+- MWAWFontConverter.hxx : reads and convert in unicode Apple© char fonts
+     MWAWFontSJISConverter.hxx : read S-JIS encoding fonts
+- MWAWPrinter.hxx : reads the mac printer information
+- MWAWOLEParser.hxx : reads some classic ole structures
+- MWAWPropertyHandler.hxx : some classes which keep a list of tag and RVNGPropertyList,
+	store/unstore then in order to be reread by writerperfect
+- MWAWStream.hxx : store an input stream and a debug ascii file
+- MWAWStringStream.hxx: creates a RVNGInputStream given a unsigned char's pointer
+
+## specific tool for graphics:
+- MWAWPict.hxx : generic pict
+- MWAWPictBitmap.hxx : a class to keep basic bitmap(ie. a 2D array of some type) and transforms them in PBM, PPM
+- MWAWPictData.hxx : basic class to manage a pict form by a chunck of classic data ( included MWAWPicMac)
+- MWAWPictMac.hxx : check macintosh Pict1.0, Pict2.0, 2.1 and convert Pict1.0 in Pict2
+
+------------------------------------------------------------
+-----------  generic listener/parser classes  --------------
+------------------------------------------------------------
+
+These files defined basic structures which must be used by the parsers :
+
+## MWAWHeader.hxx
+## MWAWSubDocument.hxx
+	Files to parse document inspired of libwpd/WP*
+
+## MWAWListener.hxx
+	The abstract class of all listener
+## MWAWGraphicListener
+	The graphic listener (used to create odg picture) with
+## MWAWTextListener.hxx
+	The text listener uses to create odt...
+## MWAWSpreadsheetListener.hxx
+	The spreadsheet listener uses to create ods...
+
+## MWAWPageSpan.hxx
+	store the page property and a page span number,
+	  define also MWAWHeaderFooter class to store header/footer property
+
+## MWAWSection.hxx
+	store the section property
+
+## MWAWFont.hxx
+	store the font property
+
+## MWAWParagraph.hxx 
+	store the paragraph property
+
+## MWAWGraphicShape.hxx to define basic graphic shape
+## MWAWGraphicStyle.hxx to store the graphic style's properties
+
+## MWAWGraphicDecoder.hxx to uncompress RVNGBinaryData into RVNGDrawingInterface orders 
+## MWAWGraphicEncoder.hxx to compress RVNGDrawingInterface orders into a RVNGBinaryData
+
+## MWAWSpreadsheetDecoder.hxx to uncompress RVNGBinaryData into RVNGSpreadsheetInterface orders 
+## MWAWSpreadsheetEncoder.hxx to compress RVNGSpreadsheetInterface orders into a RVNGBinaryData
+
+## MWAWList.hxx
+	store a simple list definition 
+
+## MWAWParser.hxx
+	a basic parser
+
+## MWAWCell.hxx, MWAWTable.hxx
+	a helper to reconstruct a table structure from a list of cell
+
+------------------------------------------------------------------------
+---  Acta/ApplePict/BeagleWks/Canvas                                 ---
+---  ClarisDraw/ClarisWks/CorelPainter/CricketDraw/DrawTable         ---
+---  DocMkr/EDoc/FreeHand/FullWrt/GreatWks/HanMacWrd/Jazz            ---
+---  LightWayTxt/MacDoc/MacDraft/MacDraw/MacPaint/MacWrt/MaxWrt      ---
+---  MarinerWrt/MindWrt/More/MouseWrt/MsWks/MsWrd/Multiplan          ---
+---  NisusWrt/PixelPaint/PowerPoint/ReadySetGo/RagTime               ---
+---  ScriptWriter/Scoop/StudentWritingC/Style/SuperPaint/TeachTxt    ---
+---  Wingz/WordMaker/WriteNow/WriterPls/ZWrt                         ---
+------------------------------------------------------------------------
+
+Specific files which depends on the type of file which is converted
+
+############# 
+
+ActaParser: parser of Acta : v2 and Classic v1
+-   ActaText : class which reads the text
+
+ActaPictParser: parser of Apple pict : v1 and v2
+
+BeagleWksParser: word document parser of BeagleWorks v1.0 and WordPerfect Works v1.2
+BeagleWksBMParser: paint document parser of BeagleWorks v1.0 and WordPerfect Works v1.2
+BeagleWksDRParser: database document parser of BeagleWorks v1.0 and WordPerfect Works v1.2
+BeagleWksDRParser: vector graphic document parser of BeagleWorks v1.0 and WordPerfect Works v1.2
+BeagleWksSSParser: spreadsheet document parser of BeagleWorks v1.0 and WordPerfect Works v1.2
+-   BeagleWksText : class which reads the text in a word document
+-   BeagleWksStructManager : class to read structure partaged between different type of document
+
+CanvasParser: parser of Canvas document : v2, v3
+-   CanvasGraph : class to read the graphics
+-   CanvasStyleManeger : class to read/manage the styles
+
+Canvas5Parser: parser of Canvas document : v5-v10
+Canvas5BMParser: parser of Canvas image .cvi document : v5-v10
+-   Canvas5Graph : class to read the graphics
+-   Canvas5Image : class to read/manage internal vectorial image
+-   Canvas5Structure : class to retrieve/uncompress the file
+-   Canvas5StyleManeger : class to read/manage the styles
+
+ClarisDrawParser : word parser of ClarisDraw document
+-   ClarisDrawGraph : class which reads the graphics and zone dispositions ...
+-   ClarisDrawStruct : class which stores the main zone structures
+-   ClarisDrawStyleManager : class which reads/stores many styles
+-   ClarisDrawText : class which reads the text and its structures
+
+ClarisWksParser : word parser of ClarisWorks/AppleWorks document (or draw)
+ClarisWksBMParser: bitmap parser of ClarisWorks/AppleWorks painting document
+ClarisWksPRParser: presentation parser of ClarisWorks/AppleWorks presentation document
+ClarisWksSSParser: spreadsheet parser of ClarisWorks/AppleWorks spreadsheet document
+-   ClarisWksDocument: main class which keeps trace of the input and defines shared general functions
+-   ClarisWksGraph : class which reads the graphics and zone dispositions ...
+-   ClarisWksDbaseContent: class which reads the main structure of a database/spreadsheet
+-   ClarisWksDatabase/CWSpreadSheet : class which reads the database/spreadsheet structure
+-   ClarisWksPresentation : class which reads the slide structures
+-   ClarisWksTable : class which reads the table structures
+-   ClarisWksText : class which reads the text and its structures
+  and
+-   ClarisWksStruct : class which stores the main zone structures
+-   ClarisWksStyleManager : class which reads/stores many styles
+
+CorelPainterParser: parser of Fractal Design/MetaCreations/Corel Paint : v1-v10
+
+CricketDrawParser: parser of Cricket Draw : v1.0.1 v1.1.1
+
+DocMkrParser: parser of DOCMaker : v4
+-   DocMkrText : class which reads the text
+
+DrawTableParser: parser of Drawing Table document : v1
+
+EDocParser: parser of eDOC : v2
+
+FreeHandParser: parser of Aldus FreeHand : v1.0 v2.0
+
+FullWrtParser: parser of FullWrite : v1.0 v2.0
+-   FullWrtGraph : class which reads the graph/sidebar
+-   FullWrtStruct : class which the shared structures
+-   FullWrtText : class which reads the text
+
+GreatWksParser : parser of GreatWorks text file(and draw): v1-v2
+GreatWksBMParser : parser of GreatWorks paint file: v1-v2
+GreatWksDBParser : parser of GreatWorks database file: v1-v2
+GreatWksDRParser: parser of GreatWorks vector graphic file: v1-v2
+GreatWksSSParser : parser of GreatWorks spreadsheet file: v1-v2
+-   GreatWksDocument : class which reads/stores the generic structures of a file
+-   GreatWksGraph : class which reads the picture/graph/frame
+-   GreatWksText : class which reads the text
+
+HanMacWrdJParser : parser of HanMac Word-J
+-   HanMacWrdJGraph : class which reads the picture/graph/frame
+-   HanMacWrdJText : class which reads the text
+
+HanMacWrdKParser : parser of HanMac Word-K 2.0.5-2.0.6
+-   HanMacWrdKGraph : class which reads the picture/graph/frame
+-   HanMacWrdKText : class which reads the text
+
+JazzSSParser : parser of Jazz spreadseet document 1.0
+JazzWriterParser : parser of Jazz writer document 1.0 with resource fork
+
+LightWayTxtParser : parser of LightWay Text v4.5
+-   LightWayTxtGraph : class which reads the picture/graph/frame
+-   LightWayTxtText : class which reads the text
+
+MacDocParser : parser of MacDoc document: v1.3
+
+MacDraftParser : parser of MacDraft document: v1
+
+MacDraft5Parser : parser of MacDraft document: v4-v5.5
+-   MacDraft5StyleManager : class which read the styles either in the data fork or in the resource fork
+
+MacDrawParser : parser of MacDraw document: v0-v1
+
+MacDrawProParser : parser of MacDraw II and MacDraw Pro document
+-   MacDrawProStyleManager : class which read the styles either in the data fork or in the resource fork
+
+MacPaintParser: parser of MacPaint v1-2 files and FullPaint v1 files (ie. of PNTG mac file)
+
+MacWrtParser : parser of MacWrite document : v1.0-5.01
+
+MacWrtProParser : parser of MacWrite II, Pro (v1.0-1.5) document
+-   MacWrtProStructures : class which reads the main structures find in a document
+
+MarinerWrtParser : parser of Mariner Write 1.6
+-   MarinerWrtGraph : class which reads the picture/graph/token
+-   MarinerWrtText : class which reads the text
+
+MaxWrtParser : parser of MaxWrite document
+
+MindWrtParser : parser of MindWrite document: v2.1
+
+MoreParser: parser of More document : v2.0 v3.0 ( organization part )
+-   MoreText : class which reads the text
+
+MouseWrtParser : parser of MouseWrite document
+
+- MsWksGraph : class which reads the picture/graph 
+- MsWksTable : class which reads a table
+- MsWksDocument  : class which defines a file zone (main or ole)
+- MsWksParser : parser of Microsoft Works document : v1.0-4.0
+- MsWksDBParser : parser of Microsoft Works database document : v2.0-4.0
+- MsWksDRParser : parser of Microsoft Works graphic document : v3.0-4.0
+- MsWksSSParser : parser of Microsoft Works spreadsheet document : v1.0-4.0
+-   MsWks3Text : class which reads the text
+-   MsWks4Zone : real parser of a v4 text ole 
+-   MsWks4Text : class which reads the text
+
+MsWrd1Parser : parser of Microsoft Word document : v1.0 
+
+MsWrdParser : parser of Microsoft Word document : v3.0-5.0 
+-   MsWrdStruct : class which defines the different structures 
+-   MsWrdText : class which reads the text and its structures
+-   MsWrdTextStyles : class which reads the styles
+
+MultiplanParser : parser of Microsoft Multiplan: v1.11
+
+NisusWrtParser : parser of a Nisus Writer document : v4.0
+-   NisusWrtGraph : class which reads the picture/graph
+-   NisusWrtStruct : class which defines the different structures used by the parsed
+-   NisusWrtText : class which reads the text
+
+PixelPaintParser : parser of PixelPaint : v1-v2
+
+PowerPoint1Parser : parser of PowerPoint : mac v1-v2 and windows v2
+PowerPoint3Parser : parser of PowerPoint : mac v3-v4 and windows v3-v4
+-   PowerPoint3OLE : parser of the non essential OLE stream
+PowerPoint7Parser : parser of PowerPoint windows 95
+-   PowerPoint7Graph : class with reads the graphic' zone
+-   PowerPoint7Struct: small classes which define some file's basic structures
+-   PowerPoint7Text : class with reads the text' zone
+
+RagTimeParser : parser of RagTime : v2-3
+-   RagTimeSpreadsheet: class which reads the spreadsheet's zones
+-   RagTimeStruct: small classes which define some file's basic structures
+-   RagTimeText: class which reads the text's zones
+
+RagTime5Parser : parser of RagTime : v5-6
+  only try to retrieve the main pictures/shapes/textboxes of a document
+-   RagTime5Chart: class which reads the chart's zones (uncomplete)
+-   RagTime5ClusterManager: basic function and classes which allows to parse the Cluster zones
+-   RagTime5Graph: class which reads the graphic's zones
+-   RagTime5Layout: class which reads the layout's zones
+-   RagTime5Pipeline: class which reads the pipeline's zones
+-   RagTime5StructManager: small classes which define some file's basic structures
+-   RagTime5StyleManager: class which reads the style
+-   RagTime5Spreadsheet: class which reads spreadsheet's zones
+-   RagTime5Text: class which reads the text's zones
+
+ReadySetGoParser: parser of Mac Ready Set Go files: v1-4.5
+
+ScoopParser: parser of Scoop files: v1
+
+ScriptWriterParser: parser of Script Writer files: v1
+
+StudentWritingCParser: parser of Student Writing Center files: v1
+
+StyleParser: parser of Style files: v1.6 and v1.9
+
+SuperPaintParser: parser of drawing and paint SuperPaint files : v1 
+
+TeachTxtParser : parser of TeachText/SimpleText document : v1.2, Tex-Edit v2.7
+
+WingzParser : parser of Claris Resolve/Wingz document : v1.1
+-   WingzGraph: class which reads the graphic's zones
+
+WordMakerParser: parser of Word Maker files: v1
+
+WriteNowParser : parser of WriteNow document : v1.0-4.0
+-   WriteNowText : class which reads the text and its structures
+-   WriteNowEntry : class to store the entry found in the document
+
+WriterPlsParser : parser of WriterPlus document
+
+ZWrtParser : parser of Z-Write document : v1.3
+-   ZWrtText : class which reads the text and its structures
